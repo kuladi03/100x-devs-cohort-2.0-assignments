@@ -4,6 +4,20 @@
 */
 
 function isPalindrome(str) {
+  let n = str.length;
+  let str1 = "";
+  for(let i = n-1 ; i >=0 ; i--){
+    if(str[i] == ' ' || str[i] > 122 || str[i] < 65){
+      str[i]=str[i-1];
+      continue;
+    }
+    str1[i]=str[i];
+  }
+  for(let i = 0 ; i < n ; i++){
+    if(str[i] != str1[i]){
+      return false;
+    }
+  }
   return true;
 }
 

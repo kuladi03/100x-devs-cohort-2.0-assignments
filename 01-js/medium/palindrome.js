@@ -2,23 +2,38 @@
   Implement a function `isPalindrome` which takes a string as argument and returns true/false as its result.
   Note: the input string is case-insensitive which means 'Nan' is a palindrom as 'N' and 'n' are considered case-insensitive.
 */
-
 function isPalindrome(str) {
-  let n = str.length;
-  let str1 = "";
-  for(let i = n-1 ; i >=0 ; i--){
-    if(str[i] == ' ' || str[i] > 122 || str[i] < 65){
-      str[i]=str[i-1];
-      continue;
-    }
-    str1[i]=str[i];
+  let start = 0;
+  let end = str.length - 1;
+  return check(str, start, end);
+}
+
+function check(str, start, end) {
+  if (start > end) {
+    return true;
   }
-  for(let i = 0 ; i < n ; i++){
-    if(str[i] != str1[i]){
-      return false;
+
+  while (start < end) {
+    if (isCharacter(str[start])) {
+      if (isCharacter(str[end])) {
+        if (str[start].toUpperCase() !== str[end].toUpperCase()) {
+          return false;
+        } else {
+          return check(str, ++start, --end);
+        }
+      } else {
+        end--;
+      }
+    } else {
+      start++;
     }
   }
+
   return true;
+}
+
+function isCharacter(char) {
+  return /^[A-Za-z]$/.test(char);
 }
 
 module.exports = isPalindrome;
